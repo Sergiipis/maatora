@@ -5,14 +5,20 @@ on:
     tags:
       - "v*.*.*"
 
+permissions:
+  contents: read
+
 jobs:
-  publish:
+  build:
+    name: Build dist + SBOM
     runs-on: ubuntu-latest
-    environment: pypi
     permissions:
-      id-token: write
+      contents: read
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -22,12 +28,109 @@ jobs:
       - name: Install build tools
         run: |
           python -m pip install --upgrade pip
-          pip install build
+          pip install build cyclonedx-bom pip-audit
 
-      - name: Build distribution
+      - name: Build sdist + wheel
         run: python -m build
+
+      - name: Read tag version
+        id: meta
+        run: |
+          echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Verify pyproject version matches tag
+        run: |
+          PYPROJECT_VERSION="$(grep -E '^version = ' pyproject.toml | head -1 | cut -d'\"' -f2)"
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          if [ "$PYPROJECT_VERSION" != "$TAG_VERSION" ]; then
+            echo "Version mismatch: pyproject=$PYPROJECT_VERSION tag=$TAG_VERSION" >&2
+            exit 1
+          fi
+          echo "Version match: $PYPROJECT_VERSION"
+
+      - name: Install the wheel into the runner env (for SBOM and audit)
+        run: pip install "dist/maatora-${GITHUB_REF_NAME#v}-py3-none-any.whl"
+
+      - name: Generate CycloneDX SBOM
+        run: |
+          cyclonedx-py environment --of JSON -o dist/sbom.cdx.json
+          cyclonedx-py environment --of XML  -o dist/sbom.cdx.xml
+          ls -la dist/
+
+      - name: Audit installed dependencies for known CVEs
+        run: |
+          # Audit transitive deps only — our own package ("maatora") is
+          # being published by this very workflow, so it is not on PyPI
+          # yet and would make pip-audit fail with "not found".
+          pip list --format freeze | grep -v "^maatora==" > /tmp/runtime-deps.txt
+          echo "--- runtime deps ---"
+          cat /tmp/runtime-deps.txt
+          pip-audit --strict --format columns --requirement /tmp/runtime-deps.txt
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 30
+
+  publish-pypi:
+    name: Publish to PyPI (Trusted Publisher + PEP 740 attestations)
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/maatora/${{ needs.build.outputs.version }}/
+    permissions:
+      id-token: write
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Drop non-distribution files from dist/
+        run: |
+          # gh-action-pypi-publish refuses unknown filenames; keep only sdist + wheel.
+          find dist/ -mindepth 1 -maxdepth 1 ! -name '*.whl' ! -name '*.tar.gz' -delete
+          ls -la dist/
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
+          attestations: true
           skip-existing: true
+          print-hash: true
+
+  github-release:
+    name: Create GitHub Release with SBOM
+    needs: [build, publish-pypi]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Generate SHA256SUMS
+        run: |
+          cd dist
+          sha256sum maatora-*.whl maatora-*.tar.gz sbom.cdx.json sbom.cdx.xml > SHA256SUMS
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: |
+            dist/maatora-*.whl
+            dist/maatora-*.tar.gz
+            dist/sbom.cdx.json
+            dist/sbom.cdx.xml
+            dist/SHA256SUMS
