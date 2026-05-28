@@ -1,0 +1,75 @@
+name: Bug report
+description: Report unexpected behavior in maatora
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a report. Before submitting, please
+        confirm the issue is reproducible against the latest released version.
+
+        If your report concerns a confidential matter affecting integrity of
+        the cryptographic chain or signing, please follow `SECURITY.md`
+        instead of opening a public issue.
+
+  - type: input
+    id: version
+    attributes:
+      label: maatora version
+      description: Output of `pip show maatora | grep Version`
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      description: Output of `python --version`
+      placeholder: "3.11.7"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: |
+        A short Python snippet (or shell session) that triggers the issue.
+        Trim it down to the smallest code that still fails.
+      render: python
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include the full traceback if applicable.
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+      description: Anything else that might help — related issues, agent framework in use, etc.

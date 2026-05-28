@@ -1,0 +1,36 @@
+name: Question
+description: Ask a question about using maatora
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For general "how do I…" questions, GitHub Discussions is usually a
+        better venue once we enable it. For now, issues are fine.
+
+        Please check the README, the `examples/` directory, and the existing
+        issues before asking.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: What are you trying to do?
+      description: Describe the goal, not just the immediate blocker.
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you tried?
+      description: |
+        Code you wrote, docs you read, related issues you found. This helps
+        avoid wasting your time and ours.
+      render: python
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What kind of guidance would help?
+      description: |
+        A code example, a pointer to documentation, a design discussion?
