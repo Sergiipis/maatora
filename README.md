@@ -68,6 +68,37 @@ print(store.receipts[0])
 For Ed25519 signing and external verification, see
 [`examples/04_verify_externally.py`](examples/04_verify_externally.py).
 
+## Verify it yourself
+
+The central claim of the library is **tamper-evident**: anyone holding
+the public key can detect any modification to a signed receipt. Here is
+the 30-second proof, runnable as-is after `pip install maatora`:
+
+```python
+from maatora import generate_keypair, sign, verify
+
+priv, pub = generate_keypair()
+canonical = b'{"action":"transfer","actor_id":"agent-alpha","amount":100}'
+sig = sign(priv, canonical)
+
+# Happy path — bytes unchanged since signing.
+assert verify(pub, canonical, sig) is True
+
+# Tampered path — a single byte changed; signature no longer holds.
+assert verify(pub, canonical.replace(b"100", b"999"), sig) is False
+
+print("Tamper-evident verification works as documented.")
+```
+
+This is the property no observability dashboard can offer: not
+"modifications are unlikely because access is controlled," but "any
+modification is publicly detectable by anyone holding the public key,
+without trusting us."
+
+For verification against a wrong public key and signatures over full
+canonical-JSON receipts, see
+[`examples/04_verify_externally.py`](examples/04_verify_externally.py).
+
 ## What you get
 
 - **Tamper-evident** — Ed25519 signatures on every action, append-only
