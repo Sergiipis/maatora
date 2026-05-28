@@ -74,7 +74,7 @@ jobs:
         # if the package is one day yanked from PyPI, the Sigstore signature
         # remains in the public transparency log and the bundle is attached
         # to the GitHub Release.
-        uses: sigstore/gh-action-sigstore-python@v3.0.0
+        uses: sigstore/gh-action-sigstore-python@v3.3.0
         with:
           inputs: |
             ./dist/*.whl
