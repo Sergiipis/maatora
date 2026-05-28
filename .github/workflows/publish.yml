@@ -10,10 +10,11 @@ permissions:
 
 jobs:
   build:
-    name: Build dist + SBOM
+    name: Build dist + SBOM + Sigstore signatures
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write
     outputs:
       version: ${{ steps.meta.outputs.version }}
     steps:
@@ -67,6 +68,18 @@ jobs:
           cat /tmp/runtime-deps.txt
           pip-audit --strict --format columns --requirement /tmp/runtime-deps.txt
 
+      - name: Sign wheel and sdist with Sigstore (Fulcio + Rekor)
+        # Standalone Sigstore bundles, independent of the PEP 740 attestations
+        # that PyPI generates from `attestations: true` in publish-pypi. Even
+        # if the package is one day yanked from PyPI, the Sigstore signature
+        # remains in the public transparency log and the bundle is attached
+        # to the GitHub Release.
+        uses: sigstore/gh-action-sigstore-python@v3.0.0
+        with:
+          inputs: |
+            ./dist/*.whl
+            ./dist/*.tar.gz
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -119,7 +132,10 @@ jobs:
       - name: Generate SHA256SUMS
         run: |
           cd dist
-          sha256sum maatora-*.whl maatora-*.tar.gz sbom.cdx.json sbom.cdx.xml > SHA256SUMS
+          ls -la
+          sha256sum maatora-*.whl maatora-*.tar.gz sbom.cdx.json sbom.cdx.xml \
+              *.sigstore.json 2>/dev/null \
+              | tee SHA256SUMS
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -131,6 +147,7 @@ jobs:
           files: |
             dist/maatora-*.whl
             dist/maatora-*.tar.gz
+            dist/*.sigstore.json
             dist/sbom.cdx.json
             dist/sbom.cdx.xml
             dist/SHA256SUMS
