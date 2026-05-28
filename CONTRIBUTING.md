@@ -70,6 +70,18 @@ pytest --cov=maatora --cov-report=term -q
 
 All four must pass. CI will run the same checks on the matrix `3.11`/`3.12`.
 
+For changes that touch packaging, runtime dependencies, or anything
+documented in the README, also run the clean-room smoke install test —
+it builds the wheel and installs it in a fresh `python:3.12-slim`
+Docker container, then runs both README snippets end-to-end:
+
+```bash
+bash scripts/smoke_install_test.sh
+```
+
+This catches missing runtime deps and broken entry points that happen
+to work in the dev venv but would fail for a first-time user.
+
 ## Pull request checklist
 
 Before requesting review, confirm:
