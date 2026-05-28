@@ -40,7 +40,7 @@ the project.
 Reports of conduct issues can be sent privately by:
 
 1. Opening a GitHub private security advisory at
-   `https://github.com/OWNER/REPO/security/advisories/new`
+   `https://github.com/sergiipis/maatora/security/advisories/new`
    (use the "Code of Conduct" label in the title), or
 2. Contacting the project maintainer directly via the email listed on
    the maintainer's GitHub profile.

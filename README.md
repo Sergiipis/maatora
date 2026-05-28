@@ -5,7 +5,7 @@
 
 <!--
 Badges will be enabled after the first public release. Reserved slots:
-[![CI](https://github.com/OWNER/REPO/actions/workflows/ci.yml/badge.svg)](.)
+[![CI](https://github.com/sergiipis/maatora/actions/workflows/ci.yml/badge.svg)](https://github.com/sergiipis/maatora/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/maatora.svg)](.)
 [![Python](https://img.shields.io/pypi/pyversions/maatora.svg)](.)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)

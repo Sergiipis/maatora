@@ -86,7 +86,7 @@ def main() -> None:
         final_answer=(
             "Agent attempted three actions. Two succeeded; one failed due to an upstream HTTP 503."
         ),
-        qr_target_url="https://github.com/OWNER/maatora",
+        qr_target_url="https://github.com/sergiipis/maatora",
         version="v0.1.0",
     )
 

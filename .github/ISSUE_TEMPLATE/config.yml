@@ -1,17 +1,17 @@
 blank_issues_enabled: false
 contact_links:
   - name: Report a concern about integrity or signing
-    url: https://github.com/OWNER/REPO/security/advisories/new
+    url: https://github.com/sergiipis/maatora/security/advisories/new
     about: |
       Please do not open a public issue for matters affecting the
       cryptographic chain or signing. Use a private security advisory instead.
       See SECURITY.md for the full process.
   - name: Documentation
-    url: https://github.com/OWNER/REPO#readme
+    url: https://github.com/sergiipis/maatora#readme
     about: README and module guide.
   - name: Compliance mapping
-    url: https://github.com/OWNER/REPO/blob/main/COMPLIANCE.md
+    url: https://github.com/sergiipis/maatora/blob/main/COMPLIANCE.md
     about: EU AI Act Article 12, SOC 2, HIPAA, GDPR mapping.
   - name: Licensing model
-    url: https://github.com/OWNER/REPO/blob/main/LICENSING.md
+    url: https://github.com/sergiipis/maatora/blob/main/LICENSING.md
     about: The layered licensing model — core MIT forever, premium and cloud separate.

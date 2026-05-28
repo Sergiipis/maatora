@@ -25,7 +25,7 @@ a fix is available creates needless risk for everyone using the library.
 Preferred channel:
 
 1. Open a private GitHub Security Advisory at
-   `https://github.com/OWNER/REPO/security/advisories/new`.
+   `https://github.com/sergiipis/maatora/security/advisories/new`.
    GitHub will keep the report private and let us coordinate a fix.
 
 Backup channel:

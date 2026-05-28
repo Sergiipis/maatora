@@ -52,4 +52,4 @@ the state being assembled toward that release.
   CLI entry point all use the new name. No external users existed before
   the rename, so no compatibility shim is provided.
 
-[Unreleased]: https://github.com/OWNER/REPO/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/sergiipis/maatora/compare/v0.1.0...HEAD
