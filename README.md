@@ -3,9 +3,9 @@
 > Cryptographic, tamper-evident audit log for AI agents.
 > Built for EU AI Act Article 12, SOC 2, and HIPAA — open-source under MIT.
 
-[![CI](https://github.com/sergiipis/maatora/actions/workflows/ci.yml/badge.svg)](https://github.com/sergiipis/maatora/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/sergiipis/maatora/actions/workflows/codeql.yml/badge.svg)](https://github.com/sergiipis/maatora/actions/workflows/codeql.yml)
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/sergiipis/maatora/badge)](https://scorecard.dev/viewer/?uri=github.com/sergiipis/maatora)
+[![CI](https://github.com/Sergiipis/maatora/actions/workflows/ci.yml/badge.svg)](https://github.com/Sergiipis/maatora/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/Sergiipis/maatora/actions/workflows/codeql.yml/badge.svg)](https://github.com/Sergiipis/maatora/actions/workflows/codeql.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Sergiipis/maatora/badge)](https://scorecard.dev/viewer/?uri=github.com/Sergiipis/maatora)
 [![PyPI](https://img.shields.io/pypi/v/maatora.svg)](https://pypi.org/project/maatora/)
 [![Python](https://img.shields.io/pypi/pyversions/maatora.svg)](https://pypi.org/project/maatora/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)

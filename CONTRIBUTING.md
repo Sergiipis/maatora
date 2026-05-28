@@ -52,7 +52,7 @@ CI will reject pull requests with any commit missing a sign-off.
 Requirements: Python 3.11 or 3.12.
 
 ```bash
-git clone https://github.com/sergiipis/maatora.git
+git clone https://github.com/Sergiipis/maatora.git
 cd maatora
 python -m venv .venv
 source .venv/bin/activate

@@ -65,11 +65,11 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/sergiipis/maatora"
-Repository = "https://github.com/sergiipis/maatora"
-Issues = "https://github.com/sergiipis/maatora/issues"
-Changelog = "https://github.com/sergiipis/maatora/blob/main/CHANGELOG.md"
-Documentation = "https://github.com/sergiipis/maatora#readme"
+Homepage = "https://github.com/Sergiipis/maatora"
+Repository = "https://github.com/Sergiipis/maatora"
+Issues = "https://github.com/Sergiipis/maatora/issues"
+Changelog = "https://github.com/Sergiipis/maatora/blob/main/CHANGELOG.md"
+Documentation = "https://github.com/Sergiipis/maatora#readme"
 
 [project.scripts]
 maatora = "maatora.cli_viewer:main"
