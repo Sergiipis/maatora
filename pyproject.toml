@@ -9,8 +9,33 @@ description = "Cryptographic action receipts for AI agents: canonical JSON, Ed25
 requires-python = ">=3.11"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [{ name = "sergiipis" }]
+authors = [{ name = "sergiipis", email = "serjus83@outlook.com" }]
+maintainers = [{ name = "sergiipis", email = "serjus83@outlook.com" }]
 readme = "README.md"
+keywords = [
+    "audit",
+    "receipts",
+    "ai-agents",
+    "ed25519",
+    "merkle",
+    "compliance",
+    "ai-act",
+    "soc2",
+    "tamper-evident",
+    "provenance",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Legal Industry",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
 dependencies = [
     "pydantic>=2.0",
     "cryptography>=42",
@@ -38,6 +63,13 @@ dev = [
     "mypy>=1.10",
     "types-jinja2",
 ]
+
+[project.urls]
+Homepage = "https://github.com/sergiipis/maatora"
+Repository = "https://github.com/sergiipis/maatora"
+Issues = "https://github.com/sergiipis/maatora/issues"
+Changelog = "https://github.com/sergiipis/maatora/blob/main/CHANGELOG.md"
+Documentation = "https://github.com/sergiipis/maatora#readme"
 
 [project.scripts]
 maatora = "maatora.cli_viewer:main"

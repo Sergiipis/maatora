@@ -84,8 +84,7 @@ def main() -> None:
         model="example-llm-v1",
         public_key_pem=public_pem,
         final_answer=(
-            "Agent attempted three actions. Two succeeded; one failed due to "
-            "an upstream HTTP 503."
+            "Agent attempted three actions. Two succeeded; one failed due to an upstream HTTP 503."
         ),
         qr_target_url="https://github.com/OWNER/maatora",
         version="v0.1.0",
