@@ -4,6 +4,11 @@ Because `maatora` is used to produce records that downstream systems
 rely on for compliance and forensics, we take reports about its integrity
 seriously.
 
+For the formal threat model — assets, trust boundaries, STRIDE-organized
+threats, and the cryptographic choices behind the design — see
+[THREAT_MODEL.md](THREAT_MODEL.md). This security policy is the
+operational document; the threat model is the design document.
+
 ## Supported versions
 
 While the project is pre-1.0, only the latest released version is

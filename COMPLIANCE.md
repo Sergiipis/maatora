@@ -7,6 +7,11 @@ industries (fintech, healthtech, legal-tech, govtech).
 
 It is informational, not legal advice.
 
+For the underlying threat model — what attacks the cryptographic chain
+defends against, and what is explicitly out of scope — see
+[THREAT_MODEL.md](THREAT_MODEL.md). Mapping a regulation to "maatora
+covers it" is only meaningful in light of that model.
+
 ## EU AI Act — Article 12 (Record-keeping)
 
 EU AI Act, Article 12, applies to high-risk AI systems with progressive

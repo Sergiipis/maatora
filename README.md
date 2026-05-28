@@ -192,7 +192,13 @@ premium modules, planned proprietary cloud service) is documented in
 
 ## Security
 
+A formal threat model — assets, trust boundaries, STRIDE-organized
+threats and their mitigations, cryptographic choices and known
+limitations — is published as [THREAT_MODEL.md](THREAT_MODEL.md). Read
+it before deploying in a setting where the receipts will be relied on
+for compliance or forensics.
+
 To report a concern about the integrity of receipts, the signing
-process, or anything that could mislead a downstream auditor, please
-follow the process in [SECURITY.md](SECURITY.md) — open a private
-GitHub Security Advisory rather than a public issue.
+process, or anything that could mislead a downstream auditor, follow
+the process in [SECURITY.md](SECURITY.md) — open a private GitHub
+Security Advisory rather than a public issue.
