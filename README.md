@@ -3,14 +3,13 @@
 > Cryptographic, tamper-evident audit log for AI agents.
 > Built for EU AI Act Article 12, SOC 2, and HIPAA — open-source under MIT.
 
-<!--
-Badges will be enabled after the first public release. Reserved slots:
 [![CI](https://github.com/sergiipis/maatora/actions/workflows/ci.yml/badge.svg)](https://github.com/sergiipis/maatora/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/maatora.svg)](.)
-[![Python](https://img.shields.io/pypi/pyversions/maatora.svg)](.)
+[![CodeQL](https://github.com/sergiipis/maatora/actions/workflows/codeql.yml/badge.svg)](https://github.com/sergiipis/maatora/actions/workflows/codeql.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/sergiipis/maatora/badge)](https://scorecard.dev/viewer/?uri=github.com/sergiipis/maatora)
+[![PyPI](https://img.shields.io/pypi/v/maatora.svg)](https://pypi.org/project/maatora/)
+[![Python](https://img.shields.io/pypi/pyversions/maatora.svg)](https://pypi.org/project/maatora/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Downloads](https://static.pepy.tech/badge/maatora/month)](.)
--->
+[![Downloads](https://static.pepy.tech/badge/maatora/month)](https://pepy.tech/project/maatora)
 
 <!--
 HERO GIF: A 90-second demo (sign → verify → tamper → verification fails)
