@@ -12,7 +12,7 @@ Example:
         run_id="20260528_195346",
         model="llama3.1:8b-instruct-q4_K_M",
         public_key_pem=public_pem,
-        qr_target_url="https://github.com/org/maatora",
+        qr_target_url="https://github.com/sergiipis/maatora",
     )
     Path("report.html").write_text(html, encoding="utf-8")
 
