@@ -1,3 +1,4 @@
+from maatora.audit_report import render_audit_report
 from maatora.ed25519_signer import generate_keypair, sign, verify
 from maatora.html_summary_renderer import render as render_html
 from maatora.langgraph_middleware import ReceiptMiddleware
@@ -17,6 +18,7 @@ __all__ = [
     "decanonicalize",
     "generate_keypair",
     "receipt",
+    "render_audit_report",
     "render_html",
     "sign",
     "verify",

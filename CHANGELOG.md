@@ -26,9 +26,16 @@ the state being assembled toward that release.
 - Local CLI for listing and showing receipts (`cli_viewer`, entry point `maatora`).
 - HTML summary renderer for human-readable audit reports
   (`html_summary_renderer`).
-- Four runnable examples in `examples/`:
+- Multi-receipt audit report renderer (`audit_report.render_audit_report`):
+  self-contained HTML with inline signature verification (VERIFIED /
+  TAMPERED badges), Merkle root display, configurable brand + title,
+  optional QR-coded footer pointing to a verification URL, print-friendly
+  layout. QR code requires the optional `qrcode` dependency
+  (`pip install maatora[audit]`).
+- Five runnable examples in `examples/`:
   `01_simple_decorator.py`, `02_langgraph_middleware.py`,
-  `03_fastapi_ingest.py`, `04_verify_externally.py`.
+  `03_fastapi_ingest.py`, `04_verify_externally.py`,
+  `05_audit_report.py`.
 - Documentation: `README.md`, `COMPLIANCE.md` (EU AI Act Article 12, SOC 2,
   HIPAA, GDPR mapping), `LICENSING.md` (layered licensing model),
   `CONTRIBUTING.md`.
