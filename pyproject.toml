@@ -9,8 +9,8 @@ description = "Cryptographic action receipts for AI agents: canonical JSON, Ed25
 requires-python = ">=3.11"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [{ name = "sergiipis", email = "serjus83@outlook.com" }]
-maintainers = [{ name = "sergiipis", email = "serjus83@outlook.com" }]
+authors = [{ name = "Sergiipis", email = "serjus83@outlook.com" }]
+maintainers = [{ name = "Sergiipis", email = "serjus83@outlook.com" }]
 readme = "README.md"
 keywords = [
     "audit",
@@ -76,6 +76,9 @@ maatora = "maatora.cli_viewer:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+maatora = ["py.typed"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
