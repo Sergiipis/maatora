@@ -1,3 +1,5 @@
+from importlib.metadata import PackageNotFoundError, version
+
 from maatora.audit_report import render_audit_report
 from maatora.ed25519_signer import generate_keypair, sign, verify
 from maatora.html_summary_renderer import render as render_html
@@ -7,6 +9,11 @@ from maatora.postgres_store import PostgresReceiptStore
 from maatora.receipt_canonical_json import canonicalize, decanonicalize
 from maatora.receipt_decorator import ReceiptStore, receipt
 from maatora.receipt_models import AgentReceipt
+
+try:
+    __version__ = version("maatora")
+except PackageNotFoundError:  # package not installed (e.g. running from a source tree)
+    __version__ = "0.0.0"
 
 __all__ = [
     "AgentReceipt",
