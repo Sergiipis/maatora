@@ -9,11 +9,10 @@
 [![PyPI](https://img.shields.io/pypi/v/maatora.svg)](https://pypi.org/project/maatora/)
 [![Python](https://img.shields.io/pypi/pyversions/maatora.svg)](https://pypi.org/project/maatora/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Downloads](https://static.pepy.tech/badge/maatora/month)](https://pepy.tech/project/maatora)
 
 <!--
 HERO GIF: A 90-second demo (sign → verify → tamper → verification fails)
-will be added before the public launch. Tooling: `vhs` or `asciinema`.
+is planned for a future release. Tooling: `vhs` or `asciinema`.
 -->
 
 ## Why this exists
@@ -60,8 +59,9 @@ transfer_funds(actor_id="agent-alpha", amount=100.0, to="alice")
 
 print(store.receipts[0])
 # {'action': 'transfer_funds', 'actor_id': 'agent-alpha',
-#  'timestamp': 1716000000.0, 'input_hash': '...', 'output_hash': '...',
+#  'timestamp': <epoch seconds>, 'input_hash': '...', 'output_hash': '...',
 #  'status': 'success', 'error': None}
+# (timestamp is the real wall-clock time of the call)
 ```
 
 For Ed25519 signing and external verification, see
@@ -155,12 +155,18 @@ Runnable examples live in [`examples/`](examples/):
   ingest endpoint
 - [`04_verify_externally.py`](examples/04_verify_externally.py) — Ed25519
   sign, verify, tamper detection
+- [`05_audit_report.py`](examples/05_audit_report.py) — multi-receipt HTML
+  audit report with inline verification (needs the `[audit]` extra for the
+  QR-coded footer)
 
 ## CLI
 
+The CLI reads receipts from a JSONL file (one receipt per line) via `-f`/`--file`,
+or from stdin if `-f` is omitted:
+
 ```bash
-maatora list
-maatora show <receipt-id>
+maatora -f receipts.jsonl list
+maatora -f receipts.jsonl show <receipt-id>
 ```
 
 ## Compliance
@@ -196,8 +202,8 @@ Core SDK (this repository, MIT forever):
 ## Contributing
 
 Contributions are welcome under the Developer Certificate of Origin (DCO).
-Sign off your commits with `git commit -s`. A `CONTRIBUTING.md` with
-detailed guidelines will be added before the public launch.
+Sign off your commits with `git commit -s`. See
+[CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 Good first contributions:
 
@@ -208,9 +214,9 @@ Good first contributions:
 
 ## Community
 
-Community channels (Discord, Twitter/X, newsletter) will be announced
-before the public launch. For now, please open a GitHub issue for
-questions, bug reports, or feature requests.
+Community channels (Discord, Twitter/X, newsletter) may be announced in a
+future release. For now, please open a GitHub issue for questions, bug
+reports, or feature requests.
 
 ## License
 
