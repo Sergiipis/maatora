@@ -19,10 +19,10 @@ applicability culminating in **August 2026**. It requires:
 
 | Requirement | How the SDK addresses it |
 |-------------|--------------------------|
-| Automatic recording of events across the lifecycle | `@action_receipt` decorator captures every tool-call action automatically |
-| Full reconstructability of algorithmic decisions | Each receipt stores input arguments, output, timestamp, agent identity, and parent receipt ID |
+| Automatic recording of events across the lifecycle | `@receipt` decorator captures every tool-call action automatically |
+| Full reconstructability of algorithmic decisions | Each receipt stores input/output hashes (`inputs_hash`, `outputs_hash`), `timestamp`, actor identity (`actor_id`), and parent trace ID (`parent_trace_id`) |
 | Complete audit trail of every relevant interaction | `merkle_log` provides append-only, tamper-evident chain |
-| Parent/child IDs for multi-agent call trees | `receipt_models` exposes `parent_id` and `correlation_id` fields |
+| Parent/child IDs for multi-agent call trees | `receipt_models` exposes the `parent_trace_id` field (plus `principal_id` for the human/service the agent acts on behalf of) |
 | Retention of at least 6 months | `postgres_store` retains receipts indefinitely; rotation policy configurable |
 | Audit layer integrated into core design, not bolted on | The SDK is the core design — receipts are produced at the moment of action, not reconstructed after the fact |
 
@@ -36,7 +36,7 @@ returned.
 | Requirement | How the SDK addresses it |
 |-------------|--------------------------|
 | Tamper-evident logs | Ed25519 signature on every receipt + Merkle hash chain |
-| Who performed the action | `receipt_models.agent_id` field, signed |
+| Who performed the action | `receipt_models` `actor_id` field, signed |
 | What data was accessed | Action name + canonical-JSON-serialized arguments |
 | When | RFC 3339 timestamp, included in signature |
 | How | Tool name, version, and result, included in signature |
@@ -91,12 +91,21 @@ Any third party (auditor, customer, regulator) holding the public key of
 the agent operator can verify a receipt without contacting the operator:
 
 ```python
-from maatora import ed25519_signer, receipt_models
+from maatora import generate_keypair, sign, verify
 
-public_key = ed25519_signer.PublicKey.from_pem("...")
-receipt = receipt_models.Receipt.from_json(open("receipt.json").read())
+# The agent operator signs the canonical bytes of each receipt and publishes
+# only the public key. In production these canonical bytes come from
+# AgentReceipt.model_dump_canonical(); here we sign a literal for clarity.
+private_pem, public_pem = generate_keypair()
+receipt_canonical = b'{"action":"transfer","actor_id":"agent-alpha","amount":100}'
+signature = sign(private_pem, receipt_canonical)
 
-assert ed25519_signer.verify(receipt, public_key)
+# Any third party holding the public key can verify — without contacting the
+# operator, trusting a dashboard, or trusting the storage layer.
+assert verify(public_pem, receipt_canonical, signature) is True
+
+# Any modification — a single byte — is detectable.
+assert verify(public_pem, receipt_canonical.replace(b"100", b"999"), signature) is False
 ```
 
 This is the property that distinguishes tamper-evident (verifiable proof)

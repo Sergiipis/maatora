@@ -22,6 +22,7 @@ python examples/01_simple_decorator.py
 python examples/02_langgraph_middleware.py
 python examples/03_fastapi_ingest.py
 python examples/04_verify_externally.py
+python examples/05_audit_report.py   # QR footer needs the [audit] extra
 ```
 
 For example `03_fastapi_ingest.py`, you can also run the server standalone:
@@ -56,4 +57,4 @@ If you are new to the SDK, read in this order:
   SIEM ingestion (Splunk, Datadog, Sentinel).
 
 Contributions of additional examples (especially for new agent frameworks)
-are welcome. See `CONTRIBUTING.md` (when added) for the contribution flow.
+are welcome. See [CONTRIBUTING.md](../CONTRIBUTING.md) for the contribution flow.

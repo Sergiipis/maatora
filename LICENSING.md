@@ -76,7 +76,7 @@ deliberate choice to minimize friction for first-time contributors. If the
 project grows to require enterprise-grade contributor management, we will
 reconsider.
 
-Concrete contribution rules will be in `CONTRIBUTING.md` (to be added).
+Concrete contribution rules are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Trademark
 

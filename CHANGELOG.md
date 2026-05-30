@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-The first public release will be `0.1.0`. Until then, this section captures
-the state being assembled toward that release.
+Nothing yet.
+
+## [0.1.0] - 2026-05-29
+
+First public release, published to PyPI.
 
 ### Added
 
@@ -53,3 +56,4 @@ the state being assembled toward that release.
   the rename, so no compatibility shim is provided.
 
 [Unreleased]: https://github.com/Sergiipis/maatora/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/Sergiipis/maatora/releases/tag/v0.1.0
